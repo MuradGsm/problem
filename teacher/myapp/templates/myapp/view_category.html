@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Kateqoriya: {{ category.name }}</h1>
+<h2>Problemlər</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Adı</th>
+            <th>Haqqında</th>
+            <th>Mülim</th>
+            <th>Həll olunub</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for problem in problems %}
+        <tr>
+            <td><a href="{% url 'view_problem' problem.id %}">{{ problem.name }}</a></td>
+            <td><a href="{% url 'view_teacher' problem.created_by.id %}">{{ problem.created_by.name }}</a></td>
+            <td>{{ problem.measures_taken }}</td>
+            <td>{{ problem.solved|yesno:"Yes,No" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

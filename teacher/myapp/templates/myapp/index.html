@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1 class='main-title'>Əsas səhifə</h1>
+<p class='main-stat'>Problem sayı: {{ problem_count }}</p>
+<p class='main-stat'>Kateqoriya sayı: {{ category_count }}</p>
+<p class='main-stat'>Müəllim sayı: {{ teacher_count }}</p>
+
+<h2 class='main-subtitle'>Yeni problemlər</h2>
+
+{% for problem in problems %}
+<div class='problem-card'>
+    <div class='problem-info'>
+        <h5 class='problem-name'>{{ problem.name }}</h5>
+        <p class='problem-detail'>Kim yaradıb: {{ problem.created_by }}</p>
+        <p class='problem-detail'>Həll olunub ?: {{ problem.solved }}</p>
+        <p class='problem-detail'>Nə vaxt yaranıb: {{ problem.created_at }}</p>
+        <p class='problem-detail'>Nə tadbir görülüb: {{ problem.measures_taken }}</p>
+        <p class='problem-detail'>Kateqoriya: {{ problem.category }}</p>
+        <p class='problem-detail'>Nəticə: {{ problem.result }}</p>
+    </div>
+    <a href="{% url 'edit_problem' problem.id %}" class='problem-edit'>Redakte et</a>
+    <form method='POST' action="{% url 'delete_problem' problem.id %}" class='problem-delete'>
+        {% csrf_token %}
+        <button type='submit' class="problem-delete-button">Problemi sil
+        </button>
+    </form>
+</div> {% endfor %}
+
+<h2 class="main-subtitle">Kateqiyalar(problem sayı)</h2>
+<ul class="category-list">
+    {% for category in categories %}
+    <li>
+        <a href="{% url 'view_category' category.id %}" class="category-link">{{ category.name }} ({{
+            category.problem_count }})
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Bütün problemlər</h1>
+
+<p><a href="{% url 'add_problem' %}">Добавить проблему</a></p>
+
+<table>
+    <tr>
+        <th>Adı</th>
+        <th>Kateqoriya</th>
+        <th>Kim yaradıb</th>
+        <th>Tarix</th>
+        <th>Həl olunub</th>
+        <th>Nəticə</th>
+        <th>İşləmlər</th>
+    </tr>
+    {% for problem in page_obj %}
+    <tr>
+        <td><a href="{% url 'view_problem' problem.id %}">{{ problem.name }}</a></td>
+        <td><a href="{% url 'view_category' problem.category.id %}">{{ problem.category.name }}</a></td>
+        <td><a href="{% url 'view_teacher' problem.created_by.id %}">{{ problem.created_by.name }}</a></td>
+        <td>{{ problem.created_at }}</td>
+        <td>{{ problem.solved }}</td>
+        <td>{{ problem.result }}</td>
+        <td>
+            <a href="{% url 'edit_problem' problem.id %}">Redakte et</a> |
+            <a href="{% url 'delete_problem' problem.id %}">Sil</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if page_obj.has_previous %}
+<a href="?page={{ page_obj.previous_page_number }}">Əvvəlki səhifə</a>
+{% endif %}
+
+{% if page_obj.has_next %}
+<a href="?page={{ page_obj.next_page_number }}">Sonraki səhifə</a>
+{% endif %}
+
+{% endblock %}

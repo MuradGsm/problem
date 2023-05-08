@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Müəlimlərin siyahısı</h1>
+<a href="{% url 'add_teacher' %}">Müəllim əlave et</a>
+<table>
+    <thead>
+        <tr>
+            <th>Adı</th>
+            <th>Fənn</th>
+            <th>Problemlər</th>
+            <th>İşləmlər</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for teacher in teachers %}
+        <tr>
+            <td><a href="{% url 'view_teacher' teacher.id %}">{{ teacher.name }}</a></td>
+            <td>{{ teacher.subject }}</td>
+            <td>{{ teacher.problem_set.count }}</td>
+            <td><a href="{% url 'view_teacher' teacher.id %}">Baxmaq</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

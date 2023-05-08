@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+    <title>Problem proqramı</title>
+</head>
+
+<body>
+    <header class='site-header'>
+        <nav class='site-nav'>
+            <a href="{% url 'index' %}">Əsas səhifə</a>
+            <a href="{% url 'list_categories' %}">Kateqoriya</a>
+            <a href="{% url 'list_teachers' %}">Müəllim</a>
+            <a href="{% url 'list_problems' %}">Problem</a>
+            <a href="{% url 'filter_problems' %}">Problem filtri</a>
+        </nav>
+
+    </header>
+
+    <main class="site-main">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2023 Problem veb proqramı</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Kateqoriyaların siyahısı</h1>
+<a href="{% url 'add_category' %}">Kateqoriya əlavə et</a>
+<table>
+    <thead>
+        <tr>
+            <th>Adı</th>
+            <th>Problemlərin sayı</th>
+            <th>Həll olunan problem sayı</th>
+            <th>İşləmlər</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.name }}</td>
+            <td>{{ category.problem_count }}</td>
+            <td>{{ category.solved_problem_count }}</td>
+            <td><a href="{% url 'view_category' category.id %}">Baxmaq</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

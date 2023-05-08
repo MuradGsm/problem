@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Kateqoriya əlavə etmək</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="{{ form.name.auto_id }}">Kateqirynın adı :</label>
+    {{ form.name }}
+    <input type="submit" value="Добавить">
+</form>
+{% endblock %}

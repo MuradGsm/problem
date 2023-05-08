@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h1>Filter Problems</h1>
+    <form method="POST" action="{% url 'filter_problems' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Filtr</button>
+    </form>
+    {% if page_obj %}
+    <h2>Problem filtrı</h2>
+    <ul>
+        {% for problem in page_obj %}
+        <li>
+            <a href="{% url 'view_problem' problem.id %}">{{ problem.name }}</a>
+            <p>{{ problem.measures_taken }}</p>
+            <p>Category: {{ problem.category.name }}</p>
+            <p>Teacher: {{ problem.created_by.name }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}

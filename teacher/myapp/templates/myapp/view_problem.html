@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <div>
+        <h5>{{ problem.name }}</h5>
+        <p>Kim yaradıb: {{ problem.created_by }}</p>
+        <p>Həl olunub?: {{ problem.solved }}</p>
+        <p>Tarix: {{ problem.created_at }}</p>
+        <p>Nə tadbir görülüb: {{ problem.measures_taken }}</p>
+        <p>Kateqoriya: {{ problem.category }}</p>
+        <p>Nəticə: {{ problem.result }}</p>
+    </div>
+    <a href="{% url 'edit_problem' problem.id %}">Redakte et</a>
+    <form method="POST" action="{% url 'delete_problem' problem.id %}">
+        {% csrf_token %}
+        <button type="submit">Sil</button>
+    </form>
+</div>
+{% endblock %}

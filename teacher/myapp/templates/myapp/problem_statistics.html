@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Статистика по проблемам</h1>
+<p>Количество проблем: {{ problem_count }}</p>
+
+<h2>Учителя</h2>
+<ul>
+    {% for teacher in teachers %}
+    <li>{{ teacher.name }} ({{ teacher.problem_count }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}
